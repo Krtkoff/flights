@@ -24,7 +24,9 @@ selectbox .autocomplete {
 
 selectbox .autocomplete ul {
     list-style: none;
-    padding: 0
+    padding: 0;
+    max-height: 222px;
+    overflow-y: scroll;
 }
 
 selectbox .autocomplete ul li {
@@ -34,7 +36,6 @@ selectbox .autocomplete ul li {
     cursor: pointer;
     padding:5px;
     background-color: #fff;
-
 }
 
 selectbox .autocomplete ul li:hover {

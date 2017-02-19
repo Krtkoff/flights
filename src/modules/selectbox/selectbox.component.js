@@ -20,7 +20,7 @@ angular
     '</div>'
   });
 
-function selectboxCtrl($scope) {
+function selectboxCtrl($scope, $window) {
 
   var that = this;
 
