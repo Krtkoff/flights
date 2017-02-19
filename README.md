@@ -14,7 +14,7 @@ How to Install
     - modules: _- internal modules_
         - search
             - `search.js`: - _- service for search_
-            - s`earchApi.js`: - _- api definition_
+            - `earchApi.js`: - _- api definition_
     - vendor: _- external libraries_
     
  
