@@ -4,6 +4,7 @@
 
 angular
   .module('app.modules', [
-    'app.search'
+    'app.search',
+    'app.selectbox'
   ]);
 

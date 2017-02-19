@@ -5,7 +5,5 @@
 angular
   .module('app', [
     'app.modules',
-    'ui.select',
-    'ngSanitize',
     'datePicker'
   ]);

@@ -7,15 +7,12 @@
     <!--vendors-->
     <script src="src/vendor/angular/angular.js"></script>
     <script src="src/vendor/angular-resource/angular-resource.js"></script>
-    <script src="src/vendor/angular-ui-select/dist/select.js"></script>
-    <script src="src/vendor/angular-sanitize/angular-sanitize.js"></script>
     <script src="src/vendor/moment/moment.js"></script>
     <script src="src/vendor/angular-datepicker/dist/index.js"></script>
 
     <!--app-->
     <script src="src/app/app.module.js"></script>
     <script src="src/app/app.config.js"></script>
-    <!--<script src="src/app/app.values.js"></script>-->
     <script src="src/app/app.js"></script>
 
     <!--list of modules-->
@@ -26,18 +23,20 @@
     <script src="src/modules/search/searchApi.js"></script>
     <script src="src/modules/search/search.js"></script>
 
+    <script src="src/modules/selectbox/selectbox.modules.js"></script>
+    <script src="src/modules/selectbox/selectbox.component.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Armata" rel="stylesheet">
+
     <!--design of select-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 
     <!--css-->
     <link rel="stylesheet" href="src/css/main.css"/>
+    <link rel="stylesheet" href="src/css/selectbox.css"/>
 
     <!--vendor css-->
-    <link rel="stylesheet" href="src/vendor/angular-ui-select/dist/select.css"/>
     <link rel="stylesheet" href="src/vendor/angular-datepicker/dist/index.css"/>
-
 
 </head>
 <body ng-app="app" ng-controller="AppCtrl">
@@ -51,37 +50,18 @@
         <form name="flights">
 
             <div class="item">
-                <ui-select id="fromPlace" ng-model="searchParams.from" theme="select2" style="min-width: 300px;"
-                           title="Odkud">
-                    <ui-select-match placeholder="Odkud...">{{$select.selected.value}}</ui-select-match>
-                    <ui-select-choices
-                            repeat="airport in airports | propsFilter: {value: $select.search, parentId: $select.search, id: $select.search}">
-                        <div ng-bind-html="airport.value | highlight: $select.search"></div>
-                        <small>
-                            ID: {{airport.parentId}}
-                        </small>
-                    </ui-select-choices>
-                </ui-select>
+                <selectbox list="airports" model="searchParams.from" placeholder="Odkud"></selectbox>
             </div>
 
             <div class="item">
-                <ui-select id="destinationPlace" ng-model="searchParams.destination" theme="select2" style="min-width: 300px;"
-                           title="Odkud">
-                    <ui-select-match placeholder="Odkud...">{{$select.selected.value}}</ui-select-match>
-                    <ui-select-choices
-                            repeat="airport in airports | propsFilter: {value: $select.search, parentId: $select.search, id: $select.search}">
-                        <div ng-bind-html="airport.value | highlight: $select.search"></div>
-                        <small>
-                            ID: {{airport.parentId}}
-                        </small>
-                    </ui-select-choices>
-                </ui-select>
+                <selectbox list="airportsD" model="searchParams.destination" placeholder="Kam"></selectbox>
             </div>
 
             <br/>
 
             <div class="item">
-                <input date-time name="pickerMinDate" ng-model="searchParams.dateFrom" id="pickerMinDate" min-date="minDate"
+                <input date-time name="pickerMinDate" ng-model="searchParams.dateFrom" id="pickerMinDate"
+                       min-date="minDate"
                        view="date" min-view="hours" timezone="UTC" placeholder="Odlet" auto-close="true">
             </div>
             <div class="item">

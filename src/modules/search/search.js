@@ -4,8 +4,7 @@
 
 angular
   .module('app.search')
-  .service('kiwiSearch', kiwiSearch)
-  .filter('propsFilter', propsFilter);
+  .service('kiwiSearch', kiwiSearch);
 
 function kiwiSearch(searchApi) {
 
@@ -24,8 +23,8 @@ function kiwiSearch(searchApi) {
   function findFlight(params) {
 
     var flight = {
-      flyFrom   : params.from.id,
-      to        : params.destination.id,
+      flyFrom   : params.from,
+      to        : params.destination,
       dateFrom  : params.dateFrom && formatDate(params.dateFrom),
       dateTo    : params.dateFrom && formatDate(params.dateFrom),
       returnFrom: params.dateBack && formatDate(params.dateBack),
@@ -42,12 +41,12 @@ function kiwiSearch(searchApi) {
   /**
    * Function returning all flights:
    *
-   * @param {string} params: flight params
+   * @param {string} term: flight params
    * @return {promise <array>} A promise for places.
    */
-  function findPlace(params) {
+  function findPlace(term) {
     var place = {
-      term  : params.from || '',
+      term  : term || '',
       v     : 2,
       locale: 'cs'
     };
@@ -69,49 +68,4 @@ function kiwiSearch(searchApi) {
   }
 
 
-}
-
-
-function propsFilter() {
-
-  /**
-   * Filter provider: Filter for maching propertis in object
-   *
-   * @param {array} items array of objects wich will be filtered
-   * @param {object} props object key/value for matching
-   * @return {array} out filtered array
-   */
-  return function (items, props) {
-
-    var out = [];
-
-    if (angular.isArray(items)) {
-      items.forEach(function (item) {
-
-        var itemMatches = false,
-            keys        = Object.keys(props),
-            prop,
-            text;
-
-        for (var i = 0; i < keys.length; i++) {
-          prop = keys[i];
-          text = props[prop].toLowerCase();
-
-          if (item[prop] && item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-            itemMatches = true;
-            break;
-          }
-        }
-
-        if (itemMatches) {
-          out.push(item);
-        }
-      });
-    }
-    else {
-      out = items;
-    }
-
-    return out;
-  };
 }
